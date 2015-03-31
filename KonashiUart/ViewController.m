@@ -65,11 +65,19 @@
     NSLog(@"KonashiUartUtilDelegate UART READ");
     NSLog(@"data:%@",data);
     //TODO 複数分まとめて届く場合があるので 改行コードで分割するなど旨いこと処理する必要がある
-    /* json として処理する例
-    if(data){
-        NSData *tmp = [data dataUsingEncoding:NSUTF8StringEncoding];
-        id jsonObj = [NSJSONSerialization JSONObjectWithData:tmp options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"jsonObj:%@",jsonObj);
+    /*
+    NSArray *rows = [data componentsSeparatedByString:@"\n"];
+    if(rows.count > 0){
+        for(int i=0;i<rows.count;i++){
+            NSString* row = [rows objectAtIndex:i];
+            //json として処理する例
+            if(row){
+                NSData *tmp = [row dataUsingEncoding:NSUTF8StringEncoding];
+                id jsonObj = [NSJSONSerialization JSONObjectWithData:tmp options:NSJSONReadingAllowFragments error:nil];
+                NSLog(@"jsonObj:%@",jsonObj);
+                //ここで json 似合った処理等を行う
+            }
+        }
     }
     */
 }
